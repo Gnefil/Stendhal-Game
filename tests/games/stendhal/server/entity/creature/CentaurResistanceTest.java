@@ -22,23 +22,25 @@ import games.stendhal.common.constants.Nature;
  *
  */
 public class CentaurResistanceTest {
+	/* a solar centaur creature */
 	Creature solarCentaur;
+	/* a glacier centaur creature */
 	Creature iceCentaur;
-	/*@Test
-	public void test() {
-		fail("Not yet implemented");
-	}*/
+	
+	/* create mock world for investigation */
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		MockStendlRPWorld.get();
 		MockStendhalRPRuleProcessor.get();
 	}
 	
+	/* reset mock world */
 	@AfterClass
 	public static void tearDownAfterClass() {
 		MockStendlRPWorld.reset();
 	}
 	
+	/* get the solar and glacier centaur from the default entity manager */
 	@Before
 	public void setUp() {
 		this.solarCentaur = SingletonRepository.getEntityManager().getCreature("solar centaur");
@@ -48,12 +50,9 @@ public class CentaurResistanceTest {
 	
 	
 	@Test
-	public void testLoad() {
-		//solarCentaur = SingletonRepository.getEntityManager().getCreature("centaur_solar");
-		//iceCentaur = SingletonRepository.getEntityManager().getCreature("centaur_glacier");
-		//assertNotSame(solarCentaur, iceCentaur);
-		//assertTrue(solarCentaur != null);
-		//assertThat(Double.valueOf(solarCentaur.getSusceptibility(Nature.FIRE)), is(0.8));
+	public void testCentaurResistance() {
+		/* solar centaur should be resistance to fire, weak to ice, vice versa for glacier */
+		/* susceptibilty < 1 means resistance */
 		assertThat(solarCentaur.getSusceptibility(Nature.FIRE), lessThan(Double.valueOf(1)));
 		assertThat(iceCentaur.getSusceptibility(Nature.ICE), lessThan(Double.valueOf(1)));
 		assertThat(solarCentaur.getSusceptibility(Nature.ICE), greaterThan(Double.valueOf(1)));
