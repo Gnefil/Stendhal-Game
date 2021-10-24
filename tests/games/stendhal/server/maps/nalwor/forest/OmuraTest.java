@@ -1,7 +1,6 @@
 package games.stendhal.server.maps.nalwor.forest;
 
 import static org.junit.Assert.assertEquals;
-
 import static utilities.SpeakerNPCTestHelper.getReply;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -10,7 +9,7 @@ import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.fsm.Engine;
 import utilities.QuestHelper;
 import utilities.ZonePlayerAndNPCTestImpl;
-//import games.stendhal.server.maps.nalwor.forest.Dojo;
+
 
 public class OmuraTest extends ZonePlayerAndNPCTestImpl {
 	
@@ -47,15 +46,24 @@ public class OmuraTest extends ZonePlayerAndNPCTestImpl {
 		
 		Engine en = samurai.getEngine();
 		
+		// atk higher than level
 		player.setLevel(60);
 		player.setAtk(57); 
-		
 		en.step(player, "hi");
 		assertEquals("This is the assassins' dojo.", getReply(samurai));
-		
 		en.step(player, "fee");
 		assertEquals("At your level of experience, your attack strength is too high to train here at this time.", getReply(samurai));
-	
+		
+		en.step(player, "bye");
+		
+		// atk equal to level
+		player.setLevel(60);
+		player.setAtk(60); 
+		en.step(player, "hi");
+		assertEquals("This is the assassins' dojo.", getReply(samurai));
+		en.step(player, "fee");
+		assertEquals("At your level of experience, your attack strength is too high to train here at this time.", getReply(samurai));
+		
 		
 		
 	}
@@ -72,8 +80,6 @@ public class OmuraTest extends ZonePlayerAndNPCTestImpl {
 		
 		en.step(player, "hi");
 		assertEquals("This is the assassins' dojo.", getReply(samurai));
-		
-		
 		en.step(player, "fee");
 		assertEquals("The fee to #train for your skill level is " + area.calculateFee(player.getAtk()) + " money.", getReply(samurai));
 		

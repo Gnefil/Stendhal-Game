@@ -129,7 +129,12 @@ public class Dojo implements ZoneConfigurator {
 				new ChatAction() {
 					@Override
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						samurai.say("The fee to #train for your skill level is " + dojoArea.calculateFee(player.getAtk()) + " money.");
+						if (dojoArea.meetsLevelCap(player, player.getAtk())) {
+							samurai.say("At your level of experience, your attack strength is too high to train here at this time.");
+						} else {
+							samurai.say("The fee to #train for your skill level is " + dojoArea.calculateFee(player.getAtk()) + " money.");
+						}
+						
 					}
 				});
 
