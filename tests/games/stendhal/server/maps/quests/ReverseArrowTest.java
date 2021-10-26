@@ -20,14 +20,23 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import games.stendhal.server.entity.item.token.Token;
+import games.stendhal.server.entity.player.Player;
+
+import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.mapstuff.portal.Door;
 import games.stendhal.server.entity.mapstuff.sign.Sign;
 import games.stendhal.server.entity.npc.NPCList;
+import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.maps.MockStendlRPWorld;
 import marauroa.common.game.RPClass;
 import utilities.PlayerTestHelper;
 import utilities.QuestHelper;
+
+import static utilities.SpeakerNPCTestHelper.getReply;
+
+import java.util.*;
 
 public class ReverseArrowTest {
 
@@ -87,5 +96,43 @@ public class ReverseArrowTest {
 		arrowquest.finish(true, null);
 		assertNull(arrowquest.player);
 	}
+	
+
+	private void addToken(LinkedList<Token> tokens,final int x, final int y){
+		final Token token = new Token("Token","Token","Yellow", null);
+		token.setPosition(x, y);
+		tokens.add(token);
+		
+	}
+	// * * 0 * *
+	// * 1 * 2 *
+	// 3 4 5 6 7
+	// * * 8 * *
+	@Test
+	public void testCheckBoard() throws Exception {
+		
+		ReverseArrow arrowquest = new ReverseArrow();
+		arrowquest.addToWorld();
+		Player player = PlayerTestHelper.createPlayer("bob");
+		PlayerTestHelper.registerPlayer(player, "int_ados_reverse_arrow");
+		player.setQuest("reverse_arrow", "done");
+		arrowquest.player = player;
+		SpeakerNPC npc = SingletonRepository.getNPCList().get("Gamblos");
+		arrowquest.npc = npc;
+
+		LinkedList<Token> tokens = new LinkedList<Token>();
+		addToken(tokens, 3, 1); //adding topmost zero
+		addToken(tokens, 3, 4); //adding token eight
+		addToken(tokens, 2, 2); //adding token one
+		addToken(tokens, 4, 2); //adding token two
+		for (int i = 1; i <= 5; i++) { //adding tokens three, four, five, six and seven
+			addToken(tokens,i, 3);
+		}
+		arrowquest.tokens = tokens;
+		ReverseArrow.ReverseArrowCheck checker = arrowquest.new ReverseArrowCheck();
+		checker.onTurnReached(3);
+		assertEquals("Congratulations, you solved the quiz again. But unfortunately I don't have any further rewards for you.", getReply(npc));
+	}
+
 
 }
