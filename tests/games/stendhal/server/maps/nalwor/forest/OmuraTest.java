@@ -1,6 +1,7 @@
 package games.stendhal.server.maps.nalwor.forest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static utilities.SpeakerNPCTestHelper.getReply;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -16,7 +17,7 @@ public class OmuraTest extends ZonePlayerAndNPCTestImpl {
 	private static final String ZONE_NAME = "dojo test zone";
 	private static final String npcName = "Omura Sumitada";
 
-	private static Dojo configurator;
+	private static Dojo dojoPlace;
 	private static SpeakerNPC samurai;
 	
 
@@ -31,13 +32,13 @@ public class OmuraTest extends ZonePlayerAndNPCTestImpl {
 	public void setUp() throws Exception {
 		setZoneForPlayer(ZONE_NAME);
 		setNpcNames(npcName);
+		dojoPlace = new Dojo();
 
-		configurator = Dojo.getInstance();
-		addZoneConfigurator(configurator, ZONE_NAME);
+		addZoneConfigurator(dojoPlace, ZONE_NAME);
 
 		super.setUp();
 
-		samurai = configurator.getNPC();
+		samurai = getNPC("Omura Sumitada");
 		
 	}
 	
@@ -76,12 +77,10 @@ public class OmuraTest extends ZonePlayerAndNPCTestImpl {
 		player.setLevel(60);
 		player.setAtk(30); 
 		
-		TrainingArea area = configurator.getArea();
-		
 		en.step(player, "hi");
 		assertEquals("This is the assassins' dojo.", getReply(samurai));
 		en.step(player, "fee");
-		assertEquals("The fee to #train for your skill level is " + area.calculateFee(player.getAtk()) + " money.", getReply(samurai));
+		assertTrue(getReply(samurai).contains("fee"));
 		
 		
 	}
