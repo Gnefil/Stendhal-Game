@@ -60,8 +60,6 @@ public class Dojo implements ZoneConfigurator {
 	/** quest states */
 	private static final String STATE_ACTIVE = "training";
 	private static final String STATE_DONE = "done";
-	
-	private static Dojo dojoInstance;
 
 	/** zone info */
 	private StendhalRPZone dojoZone;
@@ -292,26 +290,6 @@ public class Dojo implements ZoneConfigurator {
 		}
 
 		return trainTime;
-	}
-	
-	
-	// Helper methods for OmuraTest class
-	public TrainingArea getArea() {
-		return dojoArea;
-	}
-	
-	public static Dojo getInstance() {
-		if (dojoInstance == null) {
-			dojoInstance = new Dojo();
-		}
-		
-		return dojoInstance;
-	}
-	
-	
-	public TrainerNPC getNPC() {
-		return samurai;
-	}
-	
+	}	
 	
 }
