@@ -51,20 +51,6 @@ public class TeleportScrollTest {
 		zone = new StendhalRPZone("my_test_zone", 50, 50);
 		world.addRPZone(zone);
 	}
-
-	/**
-	 * Tests for teleport scroll when normally.
-	 */
-	
-	@Test
-	public void testTeleportScroll() {
-		// Set player in the test zone just created
-		final Player player = PlayerTestHelper.createPlayer("bob");
-
-		PlayerTestHelper.registerPlayer(player, zone);
-		
-		assertTrue(scroll.useScroll(player));
-	}
 	
 	
 	/**
