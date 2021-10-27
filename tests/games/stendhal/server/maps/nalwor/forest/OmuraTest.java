@@ -1,7 +1,6 @@
 package games.stendhal.server.maps.nalwor.forest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static utilities.SpeakerNPCTestHelper.getReply;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -65,22 +64,6 @@ public class OmuraTest extends ZonePlayerAndNPCTestImpl {
 		en.step(player, "fee");
 		assertEquals("At your level of experience, your attack strength is too high to train here at this time.", getReply(samurai));
 		
-		
-		
-	}
-	
-	@Test
-	public void testPlayerAtkIsNormalToTrainSpeech() {
-		
-		Engine en = samurai.getEngine();
-		
-		player.setLevel(60);
-		player.setAtk(30); 
-		
-		en.step(player, "hi");
-		assertEquals("This is the assassins' dojo.", getReply(samurai));
-		en.step(player, "fee");
-		assertTrue(getReply(samurai).contains("fee"));
 		
 		
 	}
