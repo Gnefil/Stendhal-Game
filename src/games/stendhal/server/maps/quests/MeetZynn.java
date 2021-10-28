@@ -14,11 +14,17 @@ package games.stendhal.server.maps.quests;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
+import games.stendhal.server.entity.npc.action.SetQuestAction;
+import games.stendhal.server.entity.npc.action.IncreaseXPAction;
+import games.stendhal.server.entity.npc.action.MultipleActions;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition;
 import games.stendhal.server.entity.npc.condition.LevelLessThanCondition;
+import games.stendhal.server.entity.npc.condition.QuestStateDoesNotContainStringCondition;
+import games.stendhal.server.entity.npc.condition.NotCondition;
 import games.stendhal.server.entity.player.Player;
 
 /**
@@ -30,14 +36,41 @@ import games.stendhal.server.entity.player.Player;
  * REPETITIONS: - As much as wanted.
  */
 public class MeetZynn extends AbstractQuest {
+	
+	private static final String QUEST_SLOT = "meetzynn";
+	
 	@Override
 	public String getSlotName() {
-		return "meetzynn";
+		return QUEST_SLOT;
 	}
+	private final String[] triggers = {
+			"history", 
+			"news", 
+			"geography", 
+			"places", 
+			"Faiumoni", 
+			"Semos", 
+			"history",
+			"Semos",
+			"Ados",
+			"Or'ril",
+			"Nalwor",
+			"Deniran",
+			"use",
+			"levels",
+			"naming",
+			"positioning",
+			"get",
+			"SPS",
+			"Io"
+			};
+
+	HashMap<String, Boolean> questionsAsked = new HashMap<String, Boolean>(17);
+	
 	private void step_1() {
 
 		final SpeakerNPC npc = npcs.get("Zynn Iwuhos");
-
+		/*
 		npc
 				.addReply(
 						"history",
@@ -122,18 +155,240 @@ public class MeetZynn extends AbstractQuest {
 				.addReply(
 						"Io",
 						"Her full name is \"Io Flotto\". She spends most of her time in the Temple, um, floating. She may seem weird, but her \"intuition\" works far better than any mere compass, as I can vouch.");
+		*/
+		npc.add(ConversationStates.ATTENDING, "history",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "history"),
+				ConversationStates.ATTENDING,
+				"At present, there are two significant powers on Faiumoni; the Deniran Empire, and the dark legions of Blordrough. Blordrough has recently conquered the south of the island, seizing several steel mines and a large gold mine. At present, Deniran still controls the central and northern parts of Faiumoni, including several gold and mithril mines.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "history")));
+		
+		npc.add(ConversationStates.ATTENDING, "history",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "history")),
+				ConversationStates.ATTENDING,
+				"At present, there are two significant powers on Faiumoni; the Deniran Empire, and the dark legions of Blordrough. Blordrough has recently conquered the south of the island, seizing several steel mines and a large gold mine. At present, Deniran still controls the central and northern parts of Faiumoni, including several gold and mithril mines.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "news",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "news"),
+				ConversationStates.ATTENDING,
+				"The Deniran Empire is currently seeking adventurers to sign on as mercenaries with their army to retake southern Faiumoni from the forces of Blordrough. Unfortunately Blordrough is still holding out against everything the Empire can throw at him.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "news")));
+		
+		npc.add(ConversationStates.ATTENDING, "news",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "news")),
+				ConversationStates.ATTENDING,
+				"The Deniran Empire is currently seeking adventurers to sign on as mercenaries with their army to retake southern Faiumoni from the forces of Blordrough. Unfortunately Blordrough is still holding out against everything the Empire can throw at him.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "geography",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "geography"),
+				ConversationStates.ATTENDING,
+				"Let's talk about the different #places you can visit on Faiumoni! I can also help you #get and #use a map, or give you advice on using the psychic #SPS system.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "geography")));
+		
+		npc.add(ConversationStates.ATTENDING, "geography",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "geography")),
+				ConversationStates.ATTENDING,
+				"Let's talk about the different #places you can visit on Faiumoni! I can also help you #get and #use a map, or give you advice on using the psychic #SPS system.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "places",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "places"),
+				ConversationStates.ATTENDING,
+				"The most important locations on #Faiumoni are #Or'ril Castle, #Semos, #Ados, #Nalwor, and of course #Deniran City.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "places")));
+		
+		npc.add(ConversationStates.ATTENDING, "places",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "places")),
+				ConversationStates.ATTENDING,
+				"The most important locations on #Faiumoni are #Or'ril Castle, #Semos, #Ados, #Nalwor, and of course #Deniran City.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "Faiumoni",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Faiumoni"),
+				ConversationStates.ATTENDING,
+				"Faiumoni is the island on which you stand! You've probably already noticed the mountains to the north. There is also a large desert in the middle of the island, and of course the river which bisects it, just below #Or'ril Castle to the south.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "Faiumoni")));
+		
+		npc.add(ConversationStates.ATTENDING, "Faiumoni",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Faiumoni")),
+				ConversationStates.ATTENDING,
+				"Faiumoni is the island on which you stand! You've probably already noticed the mountains to the north. There is also a large desert in the middle of the island, and of course the river which bisects it, just below #Or'ril Castle to the south.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "Semos",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Semos"),
+				ConversationStates.ATTENDING,
+				"Semos is our town where you are right now. We're on the north side of Faiumoni, with a population of about 40-50.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "Semos")));
+		
+		npc.add(ConversationStates.ATTENDING, "Semos",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Semos")),
+				ConversationStates.ATTENDING,
+				"Semos is our town where you are right now. We're on the north side of Faiumoni, with a population of about 40-50.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "Ados",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Ados"),
+				ConversationStates.ATTENDING,
+				"Ados is an important coastal city to the east of us here in #Semos, where merchants bring trade from #Deniran. It's widely considered to be one of the Empire's most important shipping routes.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "Ados")));
+		
+		npc.add(ConversationStates.ATTENDING, "Ados",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Ados")),
+				ConversationStates.ATTENDING,
+				"Ados is an important coastal city to the east of us here in #Semos, where merchants bring trade from #Deniran. It's widely considered to be one of the Empire's most important shipping routes.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "Or'ril",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Or'ril"),
+				ConversationStates.ATTENDING,
+				"Or'ril Castle is one of a series of such castles built to defend the imperial road between #Ados and #Deniran. When in use, it housed a fighting force of around 60 swordsmen, plus ancillary staff. Now that most of the Empire's army has been sent south to fend off the invaders, the castle has been abandoned by the military. As far as I'm aware, it should be empty; I hear some rumours, though...",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "Or'ril")));
+		
+		npc.add(ConversationStates.ATTENDING, "Or'ril",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Or'ril")),
+				ConversationStates.ATTENDING,
+				"Or'ril Castle is one of a series of such castles built to defend the imperial road between #Ados and #Deniran. When in use, it housed a fighting force of around 60 swordsmen, plus ancillary staff. Now that most of the Empire's army has been sent south to fend off the invaders, the castle has been abandoned by the military. As far as I'm aware, it should be empty; I hear some rumours, though...",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "Nalwor",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Nalwor"),
+				ConversationStates.ATTENDING,
+				"Nalwor is an ancient elven city, built deep inside the forest to the southeast of us long before humans ever arrived on this island. Elves don't like mixing with other races, but we're given to understand that Nalwor was built to help defend their capital city of Teruykeh against an evil force.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "Nalwor")));
+		
+		npc.add(ConversationStates.ATTENDING, "Nalwor",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Nalwor")),
+				ConversationStates.ATTENDING,
+				"Nalwor is an ancient elven city, built deep inside the forest to the southeast of us long before humans ever arrived on this island. Elves don't like mixing with other races, but we're given to understand that Nalwor was built to help defend their capital city of Teruykeh against an evil force.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "Deniran",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Deniran"),
+				ConversationStates.ATTENDING,
+				"The Empire's capital city of Deniran lies in the heart of Faiumoni, and is the main base of operations for the Deniran army. Most of the Empire's main trade routes with other countries originate in this city, then extending north through #Ados, and south to Sikhw. Unfortunately, the southern routes were been destroyed when Blordrough and his armies conquered Sikhw, some time ago now.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "Deniran")));
+		
+		npc.add(ConversationStates.ATTENDING, "Deniran",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Deniran")),
+				ConversationStates.ATTENDING,
+				"The Empire's capital city of Deniran lies in the heart of Faiumoni, and is the main base of operations for the Deniran army. Most of the Empire's main trade routes with other countries originate in this city, then extending north through #Ados, and south to Sikhw. Unfortunately, the southern routes were been destroyed when Blordrough and his armies conquered Sikhw, some time ago now.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "use",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "use"),
+				ConversationStates.ATTENDING,
+				"Once you #get a map, there are three scales on which you need to understand it. Firstly, there are the map #levels, then you need to familiarize yourself with the #naming conventions for the different zones within those levels, and lastly you should learn how we describe a person's #positioning within a zone. We'll have you navigating around in no time!",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "use")));
+		
+		npc.add(ConversationStates.ATTENDING, "use",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "use")),
+				ConversationStates.ATTENDING,
+				"Once you #get a map, there are three scales on which you need to understand it. Firstly, there are the map #levels, then you need to familiarize yourself with the #naming conventions for the different zones within those levels, and lastly you should learn how we describe a person's #positioning within a zone. We'll have you navigating around in no time!",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "levels",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "levels"),
+				ConversationStates.ATTENDING,
+				"Maps are split into levels according to the height of that particular area above or below the surface. Areas on the surface are at level 0. The level number is the first thing in a map's name. For instance, #Semos itself is at ground level, so it is level 0; its map is called \"0_semos_city\". The first level of the dungeon beneath us is at level -1, so its map is called \"-1_semos_dungeon\". You should note, though, that a map of a building's interior will usually have the level at the end of the name instead, with \"int\" (for \"interior\") at the start. For instance, the upstairs floor of the tavern would be mapped out as \"int_semos_tavern_1\".",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "levels")));
+		
+		npc.add(ConversationStates.ATTENDING, "levels",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "levels")),
+				ConversationStates.ATTENDING,
+				"Maps are split into levels according to the height of that particular area above or below the surface. Areas on the surface are at level 0. The level number is the first thing in a map's name. For instance, #Semos itself is at ground level, so it is level 0; its map is called \"0_semos_city\". The first level of the dungeon beneath us is at level -1, so its map is called \"-1_semos_dungeon\". You should note, though, that a map of a building's interior will usually have the level at the end of the name instead, with \"int\" (for \"interior\") at the start. For instance, the upstairs floor of the tavern would be mapped out as \"int_semos_tavern_1\".",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "naming",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "naming"),
+				ConversationStates.ATTENDING,
+				"Each map is usually split up into \"sets\" of zones, with a central feature that is used as a reference point. The zones surrounding this central zone are named by the direction in which they lie from it. For instance, from the central zone \"0_semos_city\", you can travel west to the old village at \"0_semos_village_w\", or you could travel two zones north and one west to the mountains at \"0_semos_mountain_n2_w\".",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "naming")));
+		
+		npc.add(ConversationStates.ATTENDING, "naming",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "naming")),
+				ConversationStates.ATTENDING,
+				"Each map is usually split up into \"sets\" of zones, with a central feature that is used as a reference point. The zones surrounding this central zone are named by the direction in which they lie from it. For instance, from the central zone \"0_semos_city\", you can travel west to the old village at \"0_semos_village_w\", or you could travel two zones north and one west to the mountains at \"0_semos_mountain_n2_w\".",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "positioning",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "positioning"),
+				ConversationStates.ATTENDING,
+				"Positioning within a zone is simply described in terms of co-ordinates. We conventionally take the top-left corner (that is, the northwest corner) to be the origin point with co-ordinates (0, 0). The first co-ordinate ('x') increases as you move to the right (that is, east) within the zone, and the second co-ordinate ('y') increases as you move down (that is, south).",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "positioning")));
+		
+		npc.add(ConversationStates.ATTENDING, "positioning",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "positioning")),
+				ConversationStates.ATTENDING,
+				"Positioning within a zone is simply described in terms of co-ordinates. We conventionally take the top-left corner (that is, the northwest corner) to be the origin point with co-ordinates (0, 0). The first co-ordinate ('x') increases as you move to the right (that is, east) within the zone, and the second co-ordinate ('y') increases as you move down (that is, south).",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "get",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "get"),
+				ConversationStates.ATTENDING,
+				"You can get a map of Stendhal at #https://stendhalgame.org/world/atlas.html if you want one. Careful you don't spoil any surprises for yourself, though!",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "get")));
+		
+		npc.add(ConversationStates.ATTENDING, "get",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "get")),
+				ConversationStates.ATTENDING,
+				"You can get a map of Stendhal at #https://stendhalgame.org/world/atlas.html if you want one. Careful you don't spoil any surprises for yourself, though!",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "SPS",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "SPS"),
+				ConversationStates.ATTENDING,
+				"SPS stands for Stendhal Positioning System; you can ask #Io in the Temple about the exact details of how it works. Essentially, it allows you to ascertain the exact current location of yourself or your friends at any time.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "SPS")));
+		
+		npc.add(ConversationStates.ATTENDING, "SPS",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "SPS")),
+				ConversationStates.ATTENDING,
+				"SPS stands for Stendhal Positioning System; you can ask #Io in the Temple about the exact details of how it works. Essentially, it allows you to ascertain the exact current location of yourself or your friends at any time.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "Io",
+				new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Io"),
+				ConversationStates.ATTENDING,
+				"Her full name is \"Io Flotto\". She spends most of her time in the Temple, um, floating. She may seem weird, but her \"intuition\" works far better than any mere compass, as I can vouch.",
+				new MultipleActions(new IncreaseXPAction(5),
+									new SetQuestAction(QUEST_SLOT, QUEST_SLOT + "Io")));
+		
+		npc.add(ConversationStates.ATTENDING, "Io",
+				new NotCondition(new QuestStateDoesNotContainStringCondition(QUEST_SLOT, "Io")),
+				ConversationStates.ATTENDING,
+				"Her full name is \"Io Flotto\". She spends most of her time in the Temple, um, floating. She may seem weird, but her \"intuition\" works far better than any mere compass, as I can vouch.",
+				null);
+		
+		npc.add(ConversationStates.ATTENDING, "bye",
+				new LevelLessThanCondition(15),
+				ConversationStates.IDLE,
+				"Bye. Hey, if you're going to hang around the library, don't forget to be quiet; people could be studying!",
+				null);
 
 		npc.add(ConversationStates.ATTENDING, "bye",
-			new LevelLessThanCondition(15),
-			ConversationStates.IDLE,
-			"Bye. Hey, if you're going to hang around the library, don't forget to be quiet; people could be studying!",
-			null);
-
-		npc.add(ConversationStates.ATTENDING, "bye",
-			new LevelGreaterThanCondition(14),
-			ConversationStates.IDLE,
-			"Bye. Hey, you should consider getting a library card, you know.",
-			null);
+				new LevelGreaterThanCondition(14),
+				ConversationStates.IDLE,
+				"Bye. Hey, you should consider getting a library card, you know.",
+				null);
+			
 	}
 
 	@Override
@@ -141,7 +396,10 @@ public class MeetZynn extends AbstractQuest {
 		fillQuestInfo(
 				"Meet Zynn Iwuhos",
 				"Zynn Iwuhos, in the Semos library, is a great source of useful information.",
-				false);
+				true);
+		for(String phrase : triggers) {
+			questionsAsked.put(phrase, false);
+		}
 		step_1();
 	}
 
