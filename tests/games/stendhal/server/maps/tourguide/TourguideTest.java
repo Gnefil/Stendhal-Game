@@ -12,10 +12,9 @@ import games.stendhal.server.core.engine.StendhalRPZone;
 public class TourguideTest {
 
 	@Test
-	public void test() {
+	public void zoneExistsTest() {
 		StendhalRPWorld world = SingletonRepository.getRPWorld();
 		StendhalRPZone zone = world.getZone("waitingroom");
 		assertNotEquals(null, zone);
 	}
-
 }
