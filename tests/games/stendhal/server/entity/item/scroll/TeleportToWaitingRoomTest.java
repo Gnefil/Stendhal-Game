@@ -15,11 +15,13 @@ public class TeleportToWaitingRoomTest {
 	public void scrollTest() {
 		final Player player = PlayerTestHelper.createPlayer("bob");
 		Scroll scroll = new MarkedScroll("marked scroll", "", "", null);
+		StendhalRPWorld world = SingletonRepository.getRPWorld();
 		scroll.setInfoString("waitingroom 20 20");
 		
-		StendhalRPWorld world = SingletonRepository.getRPWorld();
 		PlayerTestHelper.registerPlayer(player, world.getZone("0_semos_city"));
+		scroll.useScroll(player);
 		
-		assertTrue(scroll.useScroll(player));
+		assertEquals("waitingroom", player.getZone().getName());
 	}
+
 }
