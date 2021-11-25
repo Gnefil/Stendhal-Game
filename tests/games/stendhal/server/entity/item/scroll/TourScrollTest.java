@@ -6,6 +6,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPWorld;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.player.Player;
@@ -36,6 +37,12 @@ public class TourScrollTest {
 		PlayerTestHelper.registerPlayer(player, zone);
 
 		assertTrue(scroll.useScroll(player));
+	}
+	
+	@Test
+	public void tourGetItemTest() {
+		TourScroll scroll= (TourScroll) SingletonRepository.getEntityManager().getItem("tour scroll");
+		assertNotEquals(null, scroll);
 	}
 
 }
