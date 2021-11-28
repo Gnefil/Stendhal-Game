@@ -31,7 +31,7 @@ public class TourScroll extends TeleportScroll {
 			final Map<String, String> attributes) {
 		super(name, clazz, subclass, attributes);
 		locations = new ArrayList<String>();
-		locations.add("0_amazon_island_ne");
+		locations.add("0_athor_island");
 	}
 
 	/**

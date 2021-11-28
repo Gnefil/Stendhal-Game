@@ -62,11 +62,11 @@ public class TourScrollTest {
 	}
 	
 	@Test
-	public void firstLocationisAmazonTest() {
+	public void firstLocationisAthorTest() {
 		List<String> locationList = scroll.getlocations();
 		assertNotEquals(null, locationList);
 		String firstLocation = locationList.get(0);
-		assertEquals("0_amazon_island_ne", firstLocation);
+		assertEquals("0_athor_island", firstLocation);
 		
 	}
 
