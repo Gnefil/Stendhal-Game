@@ -2,7 +2,10 @@ package games.stendhal.server.entity.item.scroll;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,10 +18,19 @@ import utilities.PlayerTestHelper;
 
 public class TourScrollTest {
 	
+	private Player player;
+	private TourScroll scroll;
+	
 	// Using the mock stendl world
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		MockStendlRPWorld.get();
+	}
+	
+	@Before
+	public void setup() {
+		player = PlayerTestHelper.createPlayer("bob");
+		scroll = new TourScroll("test scroll", "", "", null);
 	}
 
 	// Reset the mock stendl world once used
@@ -29,8 +41,6 @@ public class TourScrollTest {
 	
 	@Test
 	public void tourTeleportTest() {
-		Player player = PlayerTestHelper.createPlayer("bob");
-		TourScroll scroll = new TourScroll("test scroll", "", "", null);
 		StendhalRPWorld world = MockStendlRPWorld.get();
 		StendhalRPZone zone = new StendhalRPZone("0_semos_city", 50, 50);
 		world.addRPZone(zone);		
@@ -43,6 +53,21 @@ public class TourScrollTest {
 	public void tourGetItemTest() {
 		TourScroll scroll= (TourScroll) SingletonRepository.getEntityManager().getItem("tour scroll");
 		assertNotEquals(null, scroll);
+	}
+	
+	@Test
+	public void locationTest() {
+		List<String> locationList = scroll.getlocations();
+		assertNotEquals(null, locationList);
+	}
+	
+	@Test
+	public void firstLocationisAmazonTest() {
+		List<String> locationList = scroll.getlocations();
+		assertNotEquals(null, locationList);
+		String firstLocation = locationList.get(0);
+		assertEquals("0_amazon_island_ne", firstLocation);
+		
 	}
 
 }
