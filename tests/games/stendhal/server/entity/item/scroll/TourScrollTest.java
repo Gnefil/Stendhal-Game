@@ -41,10 +41,11 @@ public class TourScrollTest {
 	
 	@Test
 	public void tourTeleportTest() {
-		StendhalRPWorld world = MockStendlRPWorld.get();
-		StendhalRPZone zone = new StendhalRPZone("0_semos_city", 50, 50);
-		world.addRPZone(zone);		
-		PlayerTestHelper.registerPlayer(player, zone);
+		StendhalRPWorld world = SingletonRepository.getRPWorld();
+		StendhalRPZone startingPos = new StendhalRPZone("0_semos_city");
+		world.addRPZone(startingPos);
+		world.addRPZone(new StendhalRPZone("0_athor_island", 500, 500));
+		PlayerTestHelper.registerPlayer(player, startingPos);
 
 		assertTrue(scroll.useScroll(player));
 	}
@@ -66,7 +67,7 @@ public class TourScrollTest {
 		List<String> locationList = scroll.getlocations();
 		assertNotEquals(null, locationList);
 		String firstLocation = locationList.get(0);
-		assertEquals("0_athor_island", firstLocation);
+		assertEquals("0_athor_island 60 32", firstLocation);
 		
 	}
 
