@@ -3,7 +3,7 @@ package games.stendhal.server.entity.item.behavior;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import games.stendhal.server.entity.player.Player;
-import utilties.PlayerTestHelper;
+import utilities.PlayerTestHelper;
 
 public class SleepingStatusTest {
 	
