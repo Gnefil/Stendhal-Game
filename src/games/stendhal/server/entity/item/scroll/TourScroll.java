@@ -64,10 +64,6 @@ public class TourScroll extends TeleportScroll {
 		return player.teleport(zone, x, y, null, player);
 	}
 
-	@Override
-	public String describe() {
-		return "";
-	}
 	
 	public List<String> getlocations() {
 		return locations;
