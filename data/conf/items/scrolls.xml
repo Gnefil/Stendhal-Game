@@ -251,6 +251,27 @@
       <slot name="portfolio"/>
     </equipable>
   </item>
+  
+    <item name="tour scroll">
+    <type class="scroll" subclass="tour" tileid="-1"/>
+    <description/>
+    <implementation class-name="games.stendhal.server.entity.item.scroll.TourScroll"/>
+    <attributes>
+      <quantity value="1"/>
+      <menu value="Use|Use"/>
+    </attributes>
+    <weight value="0.01"/>
+    <value value="1"/>
+    <equipable>
+      <slot name="ground"/>
+      <slot name="content"/>
+      <slot name="bag"/>
+      <slot name="trade"/>
+      <slot name="lhand"/>
+      <slot name="rhand"/>
+      <slot name="portfolio"/>
+    </equipable>
+  </item>
 
   <item name="invitation scroll">
     <type class="scroll" subclass="invitation" tileid="-1"/>
