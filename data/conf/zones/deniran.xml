@@ -297,7 +297,9 @@
 
 	<zone name="0_deniran_city_e2" level="0" x="499488" y="500000"
 		file="Level 0/deniran/city_e2.tmx">
-
+		
+		<configurator class-name="games.stendhal.server.maps.quests.houses.FurnitureSellerNPC.java" />
+		
 		<attributes>
 			<parameter name="color_method">time</parameter>
 			<parameter name="weather">varying</parameter>
