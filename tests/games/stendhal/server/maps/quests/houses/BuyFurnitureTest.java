@@ -12,6 +12,7 @@ import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.fsm.Engine;
 import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.maps.deniran.cityinterior.potionsshop.FurnitureSellerNPC;
 import games.stendhal.server.maps.quests.AbstractQuest;
 import utilities.PlayerTestHelper;
 import utilities.QuestHelper;
@@ -32,7 +33,7 @@ public class BuyFurnitureTest {
 	public void setUp() {
 		final StendhalRPZone zone = new StendhalRPZone("admin_test");
 		new FurnitureSellerNPC().configureZone(zone, null);
-		npc = SingletonRepository.getNPCList().get("James Oakheart");
+		npc = SingletonRepository.getNPCList().get("Oakheart");
 
 		en = npc.getEngine();
 
@@ -44,10 +45,8 @@ public class BuyFurnitureTest {
 	
 	@Test
 	public void testFurnitureResponse() {
-		en.step(player, "furniture");
-		assertEquals("Ah yes, I sell furniture that I import from all corners of the land. "
-				+ "My shipments have been delayed, however, so I don't have much to sell. "
-				+ "I do have a #chair if you're interested.", getReply(npc));
+		en.step(player, "hello");
+		assertEquals("Welcome to Deniran's furniture shop.", getReply(npc));
 	}
 	
 
