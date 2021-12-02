@@ -20,6 +20,7 @@ public class TourScrollTest {
 	
 	private Player player;
 	private TourScroll scroll;
+	private List<String> locationList;
 	
 	// Using the mock stendl world
 	@BeforeClass
@@ -31,6 +32,7 @@ public class TourScrollTest {
 	public void setup() {
 		player = PlayerTestHelper.createPlayer("bob");
 		scroll = new TourScroll("test scroll", "", "", null);
+		locationList = scroll.getlocations();
 	}
 
 	// Reset the mock stendl world once used
@@ -58,13 +60,11 @@ public class TourScrollTest {
 	
 	@Test
 	public void locationTest() {
-		List<String> locationList = scroll.getlocations();
 		assertNotEquals(null, locationList);
 	}
 	
 	@Test
 	public void firstLocationisAthorTest() {
-		List<String> locationList = scroll.getlocations();
 		assertNotEquals(null, locationList);
 		String firstLocation = locationList.get(0);
 		assertEquals("0_athor_island 60 32", firstLocation);
