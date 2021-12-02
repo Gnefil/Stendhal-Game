@@ -133,6 +133,7 @@ public final class EntityMap {
 		register("item", "drink", null, UseableItem.class);
 		register("item", "flower", null, StackableItem.class);
 		register("item", "food", null, UseableItem.class);
+		register("item", "misc", "sleeping_bag", UseableItem.class);
 		register("item", "tool", "foodmill", UseableItem.class);
 		register("item", "tool", "sugarmill", UseableItem.class);
 		register("item", "tool", "scrolleraser", UseableItem.class);
