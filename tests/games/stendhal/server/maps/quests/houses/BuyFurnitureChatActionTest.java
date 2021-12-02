@@ -77,7 +77,7 @@ public class BuyFurnitureChatActionTest {
 	}
 	
 	@Test
-	public void test() {
+	public void testFire() {
 		BuyHouseChatAction houseAction = new BuyHouseChatAction(1, HouseSellerNPCBase.QUEST_SLOT);
 		BuyFurnitureChatAction action = new BuyFurnitureChatAction(2, "oak chair");
 		String zoneName = "0_ados_city_n";
