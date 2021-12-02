@@ -43,6 +43,9 @@ public class BuyFurnitureChatAction implements ChatAction {
 				raiser.say("Sorry, I couldn't make this delivery. Make sure that you've got space in your chest and ask me again.");
 			}
 		}
+		else {
+			raiser.say("Sorry, I don't have a(n) " + itemName + ".");
+		}
 		
 	}
 

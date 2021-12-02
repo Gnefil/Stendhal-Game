@@ -79,7 +79,7 @@ public class BuyFurnitureChatActionTest {
 	@Test
 	public void test() {
 		BuyHouseChatAction houseAction = new BuyHouseChatAction(1, HouseSellerNPCBase.QUEST_SLOT);
-		BuyFurnitureChatAction action = new BuyFurnitureChatAction(2, "oak_chair");
+		BuyFurnitureChatAction action = new BuyFurnitureChatAction(2, "oak chair");
 		String zoneName = "0_ados_city_n";
 		StendhalRPZone ados = new StendhalRPZone(zoneName);
 		MockStendlRPWorld.get().addRPZone(ados);
@@ -103,7 +103,7 @@ public class BuyFurnitureChatActionTest {
 		assertTrue(chest != null);
 		
 		action.fire(player, sentence, raiser);
-		assertThat(getReply(engine), containsString("Hang on, you can't afford this chair!"));
+		assertThat(getReply(engine), containsString("Hang on, you can't afford this oak chair!"));
 		
 		PlayerTestHelper.equipWithMoney(player, 2);
 		action.fire(player, sentence, raiser);

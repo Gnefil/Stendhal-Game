@@ -3,9 +3,9 @@
 	xsi:schemaLocation="stendhal ../items.xsd ">
 
   <item name="oak chair">
-    <type class="furniture_items" subclass="oak_chair" tileid="-1" />
+    <type class="furniture_item" subclass="oak_chair" tileid="-1" />
     <description>A comfy looking oak chair.</description>
-    <implementation class-name="games.stendhal.server.entity.item.Item" />
+    <implementation class-name="games.stendhal.server.entity.item.StackableItem" />
     <attributes>
       <quantity value="1" />
     </attributes>

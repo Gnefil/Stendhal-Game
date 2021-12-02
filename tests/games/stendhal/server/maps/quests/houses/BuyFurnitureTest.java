@@ -13,8 +13,6 @@ import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.fsm.Engine;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.quests.AbstractQuest;
-import games.stendhal.server.maps.quests.MeetZynn;
-import games.stendhal.server.maps.quests.houses.FurnitureSellerNPC;
 import utilities.PlayerTestHelper;
 import utilities.QuestHelper;
 
