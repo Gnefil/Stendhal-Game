@@ -167,6 +167,29 @@ Authors of Stendhal are:
   · Bugs fixer
   - Diligent Dodo (aka Soniccuz)
   · Artist (mimic, dodo, suba diving concepts)
+  
+- Mishal Rizvi
+	· Bug fix for Gambols arrow
+	· Sleeping bag feature
+- Mihai Stoicescu
+	· Bug fix for Bestiary items
+	· House furniture feature
+- Lifeng Qui Ling
+	· Bug fix for Teleport scrolls
+	· Tour guide feature
+- Joel Hodgson Stokes
+	· Bug fix Zynn Dialogue
+	· House furniture feature
+- Anica Espanola
+	· Bug fix for Elvish Hat
+	· Sleeping bag feature
+- Ruben Bos
+	· Bug fix for Centaur susceptibility
+	· House furniture feature
+- Ashreen Kaur
+	· Bug fix for Omura dialogue
+	· Tour guide feature
+  
 
 We also thank many who have contributed to Stendhal by providing patches,
 which the rest of the team commited on their behalf.
