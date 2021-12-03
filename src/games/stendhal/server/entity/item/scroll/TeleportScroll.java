@@ -16,7 +16,6 @@ import java.util.Map;
 
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.player.Player;
-import games.stendhal.server.entity.status.StatusType;
 
 /**
  * Represents a general teleport scroll.
@@ -67,16 +66,11 @@ public abstract class TeleportScroll extends Scroll {
 	@Override
 	protected boolean useScroll(final Player player) {
 		final StendhalRPZone zone = player.getZone();
-		
-		if (player.hasStatus(StatusType.POISONED)) {
-			return false;
-		}
-		
+
 		if (!zone.isTeleportOutAllowed(player.getX(), player.getY())) {
 			player.sendPrivateText("The strong anti magic aura in this area prevents the scroll from working!");
 			return false;
 		}
-		
 
 		return useTeleportScroll(player);
 	}
