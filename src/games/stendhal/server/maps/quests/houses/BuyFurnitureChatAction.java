@@ -36,11 +36,13 @@ public class BuyFurnitureChatAction implements ChatAction {
 			
 			try{
 				HouseUtilities.findChest(playerHouse).add(SingletonRepository.getEntityManager().getItem(itemName));//adds item to chest found in playerhouse
-				raiser.say("I will deliver this " + itemName + " to " + playerHouse.getDoorId() + ". You should find it in your chest, though it won't be ready to use yet.");
+				raiser.say("I will deliver this " + itemName + " to " + playerHouse.getDoorId() 
+						+ ". You should find it in your chest, though it won't be ready to use yet.");
 				player.drop("money", cost);
 			}
 			catch(SlotIsFullException e){
-				raiser.say("Sorry, I couldn't make this delivery. Make sure that you've got space in your chest and ask me again.");
+				raiser.say("Sorry, I couldn't make this delivery. "
+						+ "Make sure that you've got space in your chest and ask me again.");
 			}
 		}
 		else {
